@@ -1,8 +1,8 @@
 package main
 
 import (
-	"DMCommunicationService/src/github.com/DMEvanCT/MailGun"
-	"DMCommunicationService/src/github.com/DMEvanCT/Slack"
+	"../../../MailGun"
+	"../../../Slack"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
