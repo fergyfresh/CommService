@@ -25,8 +25,10 @@ install:
   - glide cc
   - glide up
   - glide install
+  - github.com/mailgun/mailgun-go
 
-# Don't email me the results of the test runs.
+
+    # Don't email me the results of the test runs.
 notifications:
   email: false
 
