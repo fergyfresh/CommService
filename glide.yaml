@@ -1,4 +1,4 @@
-package: .
+package: github.com/DMEvanCT/CommService
 import:
 - package: github.com/bluele/slack
 - package: github.com/gorilla/mux
