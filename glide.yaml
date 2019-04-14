@@ -3,6 +3,6 @@ import:
 - package: github.com/bluele/slack
 - package: github.com/gorilla/mux
   version: ~1.7.1
-- package: github.com/DMEvanCT/mailgun-go
+# - package: github.com/DMEvanCT/mailgun-go
 - package: github.com/spf13/viper
   version: ~1.3.2
