@@ -1,4 +1,4 @@
-package: DMCommunicationService/src/github.com/DMEvanCT
+package: .
 import:
 - package: github.com/bluele/slack
 - package: github.com/gorilla/mux
