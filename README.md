@@ -13,7 +13,7 @@ Tool can be moved to /usr/local/bin by sudo cp claritytools /usr/local/bin.  Aft
 1. Create the directory /etc/commservice/comconfig.yaml
 2. Inside of that directory creat the following file 
 
-credentials.yaml
+comconfig.yaml
 
 ```yaml
 slack:
