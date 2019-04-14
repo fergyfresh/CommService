@@ -1,0 +1,9 @@
+package: DMCommunicationService/src/github.com/DMEvanCT
+import:
+- package: github.com/bluele/slack
+- package: github.com/gorilla/mux
+  version: ~1.7.1
+- package: github.com/mailgun/mailgun-go
+  version: ~3.3.3
+- package: github.com/spf13/viper
+  version: ~1.3.2
