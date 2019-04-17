@@ -18,7 +18,6 @@ type MailGunData struct {
 
 
 
-var service string;
 
 func MailGunComm(w http.ResponseWriter, r *http.Request) {
 
@@ -44,16 +43,14 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	sender := viper.GetString("mailgun.Sender")
 	senderName := viper.GetString("mailgun.SenderName")
 	// Selecting service to
-	service = MailGunData.Service
+	service := MailGunData.Service
 	switch service {
 	case "MailGun":
 		SendMailGunEmail(domain, token, MailGunData.Subject, MailGunData.Message, MailGunData.To, sender, senderName)
 
 
-
-		default:
-		log.Println("Service not yet defined.")
 	}
+
 
 }
 
