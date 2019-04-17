@@ -2,15 +2,15 @@ package MailGunz
 
 import (
 	"context"
-	"time"
 	"github.com/mailgun/mailgun-go"
+	"time"
 )
 
 
 
 
 
-func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName string) (string, error) {
+func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName string) (string,  error) {
 	mg := mailgun.NewMailgun(domain, apiKey)
 	m := mg.NewMessage(
 		 senderName + " " +  "<" + sender + ">",
@@ -25,6 +25,6 @@ func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName s
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer cancel()
 
-	_, id, err := mg.Send(ctx, m)
+	_, id, err  := mg.Send(ctx, m)
 	return id, err
 }
