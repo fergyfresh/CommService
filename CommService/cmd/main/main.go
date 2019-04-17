@@ -1,13 +1,15 @@
 package main
 
 import (
-	"../../../MailGun"
-	"../../../Slack"
+	"github.com/DMEvanCT/MailGun"
+	"github.com/DMEvanCT/Slack"
+	"github.com/DMEvanCT/Middleware"
 	"github.com/gorilla/mux"
+	ghandlers "github.com/gorilla/handlers"
 	"log"
 	"net/http"
+	"os"
 )
-
 
 func main() {
 	r := mux.NewRouter()
@@ -16,8 +18,11 @@ func main() {
 	// EmailFunc.go has the function for this
 	r.HandleFunc("/api/comm/mailgun/message", MailGunz.MailGunComm).Methods("POST")
 
+	// writes all requests in apache format to standard out and recovers from panic
+	http.Handle("/", middleware.PanicRecoveryHandler((ghandlers.LoggingHandler(os.Stdout, r))))
+
 	// listens on localhost:8080
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 
 
 
