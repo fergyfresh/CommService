@@ -16,17 +16,21 @@ type MailGunData struct {
 	Service string `json:"Service"  bson:"Service"`
 }
 
+type SendConfirm struct {
+
+}
+
 
 
 
 func MailGunComm(w http.ResponseWriter, r *http.Request) {
 
-
+	var mailSent = map[string]bool{}
 	var   MailGunData MailGunData
 	w.Header().Set("Content-Type", "application/json")
 
 	_ = json.NewDecoder(r.Body).Decode(&MailGunData)
-
+	mailSent["sent"] = false
 
 	// Viper configuration this reads from the config file
 	viper.AddConfigPath("/etc/commservice/")
@@ -49,7 +53,11 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 		SendMailGunEmail(domain, token, MailGunData.Subject, MailGunData.Message, MailGunData.To, sender, senderName)
 
 
+
 	}
+
+	mailSent["sent"] = true
+	json.NewEncoder(w).Encode(mailSent["sent"])
 
 
 }

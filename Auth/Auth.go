@@ -22,7 +22,7 @@ func AuthenticatedUser(w http.ResponseWriter, r *http.Request) bool {
 	var AuthInfo  AuthInfo
 	_ = json.NewDecoder(r.Body).Decode(&AuthInfo)
 	w.Header().Set("Content-Type", "application/json")
-
+	var authenticated bool;
 	viper.AddConfigPath("/etc/commservice/")
 	viper.SetConfigName("credentials")
 	viper.ReadInConfig()
@@ -55,15 +55,15 @@ func AuthenticatedUser(w http.ResponseWriter, r *http.Request) bool {
 			}
 			if apikey != AuthInfo.APIKey  {
 				log.Fatal("You are not authenticated")
-				return false
+				return authenticated == false
 			}
 
 			if apikey == AuthInfo.APIKey {
 				log.Println("You are authenticated!")
-				return true
+				return authenticated == true
 			}
 
 		}
 
-
+		return authenticated
 	}
