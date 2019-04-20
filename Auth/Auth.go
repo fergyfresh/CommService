@@ -2,9 +2,9 @@ package Auth
 
 import (
 	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 	"log"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 
@@ -40,13 +40,14 @@ func AuthenticatedUser(akey, username string) (bool) {
 		defer stmt.Close()
 
 
+
 		for stmt.Next() {
 			err := stmt.Scan(&apikey)
 			if err != nil {
 				log.Fatal(err)
 			}
 			if apikey != akey {
-				log.Fatal("You are not authenticated")
+				log.Println("You are not authenticated")
 				 authenticated := false
 				return authenticated
 			}
@@ -57,7 +58,6 @@ func AuthenticatedUser(akey, username string) (bool) {
 				return authenticated
 			}
 
-			recover()
 		}
 
 		return authenticated

@@ -33,13 +33,13 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	username := r.Header.Get("x-auth-user")
 	//auth := Auth.AuthenticatedUser("c4a3acd4-2ef6-4a5c-b97a-0aa5578503cf", "Clarity")
 	auth := Auth.AuthenticatedUser(akey, username)
-	log.Println(auth)
-	//if auth == false {
-	//	json.NewEncoder(w).Encode("Unauthenticated")
-		//http.Error(w, http.StatusText(403), 403)
+	if auth == false {
+		json.NewEncoder(w).Encode("Unauthenticated")
+
+		return
 
 
-	//}
+	}
 
 
 
