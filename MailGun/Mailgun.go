@@ -2,6 +2,7 @@ package MailGunz
 
 import (
 	"context"
+	"fmt"
 	"github.com/mailgun/mailgun-go"
 	"time"
 )
@@ -27,4 +28,8 @@ func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName s
 
 	_, id, err  := mg.Send(ctx, m)
 	return id, err
+}
+
+func SendMaulGunEmailTemplate() {
+	fmt.Println("This is the template func")
 }

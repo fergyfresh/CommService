@@ -24,6 +24,10 @@ mailgun:
   domain: (mailgun domain)
   sender: (sender ex tech@darkamtterct.com)
   SenderName: (sender name ex: Dark Matter IT Tech)
+authdb:
+  username: (DB Username)
+  password: (DB Password)
+  dbhost:   (db ip)
 ```
 
 The following are the current post to URL's and the json to go with it. 
