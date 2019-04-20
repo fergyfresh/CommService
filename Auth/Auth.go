@@ -2,37 +2,29 @@ package Auth
 
 import (
 	"database/sql"
-	"encoding/json"
 	"github.com/spf13/viper"
 	"log"
-	"net/http"
+	_ "github.com/go-sql-driver/mysql"
 )
 
-type AuthInfo struct {
-	UserName string
-	APIKey string
-
-}
-
-var apikey string;
-
-func AuthenticatedUser(w http.ResponseWriter, r *http.Request) bool {
 
 
-	var AuthInfo  AuthInfo
-	_ = json.NewDecoder(r.Body).Decode(&AuthInfo)
-	w.Header().Set("Content-Type", "application/json")
+
+func AuthenticatedUser(akey, username string) (bool) {
+
+	var apikey string
 	var authenticated bool;
 	viper.AddConfigPath("/etc/commservice/")
-	viper.SetConfigName("credentials")
+	viper.SetConfigName("comconfig")
 	viper.ReadInConfig()
-	dbusername := viper.GetString("devdb.username")
-	dbpass := viper.GetString("devdb.password")
-	serverip := viper.GetString("devdb.dbhost")
+	dbusername := viper.GetString("authdb.username")
+	dbpass := viper.GetString("authdb.password")
+	serverip := viper.GetString("authdb.dbhost")
 
-	db, err := sql.Open("mysql", dbusername+":"+dbpass+"@tcp("+serverip+")"+"/")
+	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
 	if err != nil {
-		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + "Please check /etc/commservice/credentials.yaml")
+		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
+		log.Fatal(err)
 
 	}
 		tx, err := db.Begin()
@@ -41,7 +33,7 @@ func AuthenticatedUser(w http.ResponseWriter, r *http.Request) bool {
 		}
 
 		defer tx.Rollback()
-		stmt, err := tx.Query("SELECT apikey FROM accontrol.tbl_users WHERE username = %v", AuthInfo.UserName )
+		stmt, err := tx.Query("SELECT apikey FROM accontrol.tbl_users WHERE username = ?", username )
 		if err != nil {
 			log.Fatal("There was a problem looking you up.")
 		}
@@ -53,17 +45,21 @@ func AuthenticatedUser(w http.ResponseWriter, r *http.Request) bool {
 			if err != nil {
 				log.Fatal(err)
 			}
-			if apikey != AuthInfo.APIKey  {
+			if apikey != akey {
 				log.Fatal("You are not authenticated")
-				return authenticated == false
+				 authenticated := false
+				return authenticated
 			}
 
-			if apikey == AuthInfo.APIKey {
+			if apikey == akey {
 				log.Println("You are authenticated!")
-				return authenticated == true
+				authenticated := true
+				return authenticated
 			}
 
+			recover()
 		}
 
 		return authenticated
+
 	}

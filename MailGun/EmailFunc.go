@@ -2,6 +2,7 @@ package MailGunz
 
 import (
 	"encoding/json"
+	"github.com/DMEvanCT/Auth"
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
@@ -28,6 +29,21 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	var mailSent = map[string]bool{}
 	var   MailGunData MailGunData
 	w.Header().Set("Content-Type", "application/json")
+	akey := r.Header.Get("x-auth-token")
+	username := r.Header.Get("x-auth-user")
+	//auth := Auth.AuthenticatedUser("c4a3acd4-2ef6-4a5c-b97a-0aa5578503cf", "Clarity")
+	auth := Auth.AuthenticatedUser(akey, username)
+	log.Println(auth)
+	//if auth == false {
+	//	json.NewEncoder(w).Encode("Unauthenticated")
+		//http.Error(w, http.StatusText(403), 403)
+
+
+	//}
+
+
+
+
 
 	_ = json.NewDecoder(r.Body).Decode(&MailGunData)
 	mailSent["sent"] = false
