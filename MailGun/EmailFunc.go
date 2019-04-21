@@ -17,16 +17,20 @@ type MailGunData struct {
 	Service string `json:"Service"  bson:"Service"`
 }
 
-type SendConfirm struct {
 
+type MailGunReturnData struct {
+	Sent string  `json:"Sent"  bson:"Sent"`
+	Subject string `json:"Subject"  bson:"Subject"`
+	Message string `json:"Message"  bson:"Message"`
+	To string `json:"To"  bson:"To"`
 }
 
 
 
 
-func MailGunComm(w http.ResponseWriter, r *http.Request) {
 
-	var mailSent = map[string]bool{}
+
+func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	var   MailGunData MailGunData
 	w.Header().Set("Content-Type", "application/json")
 	akey := r.Header.Get("x-auth-token")
@@ -34,7 +38,13 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	//auth := Auth.AuthenticatedUser("c4a3acd4-2ef6-4a5c-b97a-0aa5578503cf", "Clarity")
 	auth := Auth.AuthenticatedUser(akey, username)
 	if auth == false {
-		json.NewEncoder(w).Encode("Unauthenticated")
+		w.WriteHeader(http.StatusForbidden)
+
+		authenticated := Auth.Authenticated{
+			Authenticated: "False",
+		}
+		json.NewEncoder(w).Encode(authenticated)
+
 
 		return
 
@@ -46,7 +56,7 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 
 
 	_ = json.NewDecoder(r.Body).Decode(&MailGunData)
-	mailSent["sent"] = false
+
 
 	// Viper configuration this reads from the config file
 	viper.AddConfigPath("/etc/commservice/")
@@ -67,13 +77,25 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 	switch service {
 	case "MailGun":
 		SendMailGunEmail(domain, token, MailGunData.Subject, MailGunData.Message, MailGunData.To, sender, senderName)
+		MailGunInfo := MailGunReturnData{
+			Sent: "Yes",
+			Subject: MailGunData.Subject,
+			Message: MailGunData.Message,
+			To: MailGunData.To,
+
+
+		}
+		json.NewEncoder(w).Encode(MailGunInfo)
+
 
 
 
 	}
 
-	mailSent["sent"] = true
-	json.NewEncoder(w).Encode(mailSent["sent"])
+
+
+
+
 
 
 }
