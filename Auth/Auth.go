@@ -7,6 +7,10 @@ import (
 	"log"
 )
 
+type Authenticated struct {
+	Authenticated string
+}
+
 
 
 
@@ -49,6 +53,7 @@ func AuthenticatedUser(akey, username string) (bool) {
 			if apikey != akey {
 				log.Println("You are not authenticated")
 				 authenticated := false
+
 				return authenticated
 			}
 
