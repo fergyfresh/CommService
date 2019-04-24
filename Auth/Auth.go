@@ -68,3 +68,7 @@ func AuthenticatedUser(akey, username string) (bool) {
 		return authenticated
 
 	}
+
+func AuthorizedUser(username, apikey string) {
+ log.Println("This is the auth function")
+}

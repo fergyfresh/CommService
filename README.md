@@ -7,6 +7,11 @@ Used for communications between Application and users
 
 Tool can be moved to /usr/local/bin by sudo cp claritytools /usr/local/bin.  After that you can run claritytools -h from the command line. 
 
+FYI the service queries an auth db for token and username. They are set with the headers.
+x-auth-token 
+x-auth-user
+
+If you have an issue setting this up reach out and I will post the demo SQL.
 
 ####Credentials Files
 
@@ -28,6 +33,11 @@ authdb:
   username: (DB Username)
   password: (DB Password)
   dbhost:   (db ip)
+emaildb:
+  username: (Email DB Username)
+  password: (Email DB password)
+  dbhost: (Email DB Host)
+
 ```
 
 The following are the current post to URL's and the json to go with it. 
@@ -48,6 +58,25 @@ The following are the current post to URL's and the json to go with it.
 "Message": "Hello All",
 "To": "evan.haston@darkmatterct.com",
 "Service": "MailGun"
+}
+```
+
+:8080/api/comm/mailgun/multimessage
+```json 
+{
+	"MailGunData": {
+		"Subject": "Testing Multi", 
+		"Message": "Here is the message!",
+		"To": null, 
+		"Service": "MailGunMulti"
+	},
+	"QueryField": "DatabaseColumn",
+	"Condition": "ValueofColumn",
+	"City": "null", 
+	"State": "null",
+	"Database": {
+		"Database": "EmailDB.tbl_user_info"
+	}
 }
 ```
 

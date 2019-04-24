@@ -8,7 +8,9 @@ import (
 	"net/http"
 )
 
-
+type Database struct {
+	Database string `json:"Database"  bson:"Database"`
+}
 
 type MailGunData struct {
 	Message string `json:"Message"  bson:"Message"`
@@ -25,8 +27,16 @@ type MailGunReturnData struct {
 	To string `json:"To"  bson:"To"`
 }
 
+type MailGunMultiSend struct {
 
+	MailGunData MailGunData
+	QueryField string `json:"QueryField"  bson:"QueryField"`
+	Condition string `json:"Condition"  bson:"Condition"`
+	State string `json:"State"  bson:"State"`
+	City string `json:"City"  bson:"City"`
+	Database Database
 
+}
 
 
 
@@ -92,11 +102,68 @@ func MailGunComm(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	}
+
+func MailGunMulti(w http.ResponseWriter, r *http.Request) {
+	var   MultiSendData MailGunMultiSend
+	//var MailGunData MailGunData
+	// var Database Database
+	w.Header().Set("Content-Type", "application/json")
+	akey := r.Header.Get("x-auth-token")
+	username := r.Header.Get("x-auth-user")
+
+	auth := Auth.AuthenticatedUser(akey, username)
+	if auth == false {
+		w.WriteHeader(http.StatusForbidden)
+
+		authenticated := Auth.Authenticated{
+			Authenticated: "False",
+		}
+		json.NewEncoder(w).Encode(authenticated)
+
+
+		return
+
+
+	}
+	_ = json.NewDecoder(r.Body).Decode(&MultiSendData)
+
+
+	viper.AddConfigPath("/etc/commservice/")
+	viper.SetConfigName("comconfig")
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatal("Not able to read in config", err)
+	}
+
+	// set the token and channel name to the token and channel name inside of the mailgun block of the yaml
+	token := viper.GetString("mailgun.apiKey")
+	domain := viper.GetString("mailgun.domain")
+	sender := viper.GetString("mailgun.Sender")
+	senderName := viper.GetString("mailgun.SenderName")
+	// Selecting service to
+
+	service := MultiSendData.MailGunData.Service
+
+	switch service {
+	case "MailGunMulti":
+		SendMailGunEmailByFieldNonTemplate(MultiSendData.Condition, MultiSendData.Database.Database, MultiSendData.QueryField, domain, token, MultiSendData.MailGunData.Subject, MultiSendData.MailGunData.Message,
+			sender, senderName, MultiSendData.City, MultiSendData.State)
+			json.NewEncoder(w).Encode(&MultiSendData)
+
+
+
+	}
+	}
 
 
 
 
 
 
-}
+
+
+
+
 
