@@ -7,6 +7,11 @@ Used for communications between Application and users
 
 Tool can be moved to /usr/local/bin by sudo cp claritytools /usr/local/bin.  After that you can run claritytools -h from the command line. 
 
+FYI the service queries an auth db for token and username. They are set with the headers.
+x-auth-token 
+x-auth-user
+
+If you have an issue setting this up reach out and I will post the demo SQL.
 
 ####Credentials Files
 
