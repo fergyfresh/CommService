@@ -28,6 +28,11 @@ authdb:
   username: (DB Username)
   password: (DB Password)
   dbhost:   (db ip)
+emaildb:
+  username: (Email DB Username)
+  password: (Email DB password)
+  dbhost: (Email DB Host)
+
 ```
 
 The following are the current post to URL's and the json to go with it. 
@@ -48,6 +53,25 @@ The following are the current post to URL's and the json to go with it.
 "Message": "Hello All",
 "To": "evan.haston@darkmatterct.com",
 "Service": "MailGun"
+}
+```
+
+:8080/api/comm/mailgun/multimessage
+```json 
+{
+	"MailGunData": {
+		"Subject": "Testing Multi", 
+		"Message": "Here is the message!",
+		"To": null, 
+		"Service": "MailGunMulti"
+	},
+	"QueryField": "DatabaseColumn",
+	"Condition": "ValueofColumn",
+	"City": "null", 
+	"State": "null",
+	"Database": {
+		"Database": "EmailDB.tbl_user_info"
+	}
 }
 ```
 
