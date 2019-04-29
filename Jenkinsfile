@@ -9,8 +9,11 @@ pipeline {
     stage('Build ') {
       parallel {
         stage('Build ') {
+          environment {
+            GOPATH = '${PWD}'
+          }
           steps {
-            sh 'GOPATH=${PWD} && echo hello && pwd'
+            sh 'echo $GOPATH '
             sh 'export GOPATH=${PWD}'
             sh '''export GOBIN=$GOPATH/bin
 '''
