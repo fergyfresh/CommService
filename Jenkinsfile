@@ -11,6 +11,7 @@ pipeline {
         stage('Build ') {
           steps {
             node(label: 'QA_AUTO') {
+              sh 'hostname '
               sh 'whoami'
               sh 'go build ./... '
             }
