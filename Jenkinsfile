@@ -10,7 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
-            sh '''export GOPATH=${\'pwd\'} && export GOBIN=$GOPATH/bin
+            sh '''export GOPATH=$(pwd) && export GOBIN=$GOPATH/bin
  && export PATH=$PATH:$GOBIN
  && curl https://glide.sh/get | sh && glide install && go build ./...
 
