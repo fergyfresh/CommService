@@ -10,10 +10,10 @@ pipeline {
       parallel {
         stage('Build ') {
           environment {
-            GOPATH = 'pwd'
+            GOPATH = '${env.WORKSPACE}'
           }
           steps {
-            sh 'echo $(exec ${GOPATH})'
+            sh 'echo $GOPATH'
             sh 'export GOPATH=${PWD}'
             sh '''export GOBIN=$GOPATH/bin
 '''
