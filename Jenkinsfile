@@ -11,6 +11,12 @@ pipeline {
         stage('Build ') {
           steps {
             sh 'GOPATH=${PWD}'
+            sh '''export GOPATH=$(go env GOPATH)
+'''
+            sh '''export GOBIN=$GOPATH/bin
+'''
+            sh '''export PATH=$PATH:$GOBIN
+'''
             sh '''curl https://glide.sh/get | sh
 
 '''
