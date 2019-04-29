@@ -34,7 +34,7 @@ pipeline {
       parallel {
         stage('Deploy to Kubernetes') {
           steps {
-            sh 'sh "echo Deploy to Kubernetes"'
+            echo 'Deploy to Kubernetes'
           }
         }
         stage('Slack Message ') {
