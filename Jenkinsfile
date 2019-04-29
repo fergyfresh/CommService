@@ -10,18 +10,12 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
-            sh 'echo $GOPATH'
-            sh 'export GOPATH=${PWD}'
-            sh '''export GOBIN=$GOPATH/bin
-'''
-            sh '''export PATH=$PATH:$GOBIN
-'''
-            sh 'echo $GOPATH'
-            sh '''curl https://glide.sh/get | sh
+            sh '''export GOPATH=${env.WORKSPACE} && export GOBIN=$GOPATH/bin
+ && export PATH=$PATH:$GOBIN
+ && curl https://glide.sh/get | sh && glide install && go build ./...
 
-'''
-            sh 'glide install '
-            sh 'go build ./...'
+ '''
+            sh 'echo $GOPATH'
           }
         }
         stage('Slack Message') {
@@ -50,8 +44,5 @@ pipeline {
         }
       }
     }
-  }
-  environment {
-    GOPATH = '${env.BUILD_ID}'
   }
 }
