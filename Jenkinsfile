@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
           steps {
             echo 'Build Step'
-            sh 'source ~/.bash_profile'
+            sh 'source /etc/bashrc'
             catchError() {
               sh '''
 
@@ -17,7 +17,18 @@ pipeline {
 
 
 
-go build ./...'''
+go build ./...
+
+
+
+
+
+
+
+
+
+
+'''
             }
 
           }
