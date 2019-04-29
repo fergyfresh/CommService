@@ -1,8 +1,4 @@
 pipeline {
-  environment {
-    GOPATH = "${WORKSPACE}"
-    GOBIN = "${WORKSPACE + '/bin'}"
-   }
   agent {
     node {
       label 'QA_AUTO'
@@ -13,9 +9,9 @@ pipeline {
     stage('Build ') {
       parallel {
         stage('Build ') {
-      
           steps {
             sh 'echo $GOPATH'
+            sh 'mkdir bin '
             sh ' curl https://glide.sh/get | sh '
             sh 'glide install '
             sh 'go build ./...'
@@ -47,5 +43,9 @@ pipeline {
         }
       }
     }
+  }
+  environment {
+    GOPATH = "${WORKSPACE}"
+    GOBIN = "${WORKSPACE + '/bin'}"
   }
 }
