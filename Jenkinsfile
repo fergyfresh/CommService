@@ -10,7 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           environment {
-            GOPATH = 'PWD'
+            GOPATH = 'pwd'
           }
           steps {
             sh 'echo $[GOPATH] '
