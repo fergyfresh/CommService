@@ -1,51 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            echo 'Build Step'
-            sh 'source /etc/bashrc'
-            catchError() {
-              sh '''
-
-
-
-
-
-
-
-
-go build ./...
-
-
-
-
-
-
-
-
-
-
-'''
-            }
-
-          }
-        }
-        stage('Communication Step ') {
-          steps {
-            echo 'Comm Step '
-          }
-        }
-      }
-    }
-    stage('Qualtiy Gates') {
+    stage('Set Environment ') {
       steps {
-        echo 'Checking Quality Gate'
+        echo 'Build Step'
+        sh 'source /etc/bashrc'
       }
     }
-    stage('Build Docker') {
+    stage('Build') {
+      steps {
+        sh 'go build ./...'
+      }
+    }
+    stage('Quality Gates') {
       steps {
         echo 'Build Docker'
       }
