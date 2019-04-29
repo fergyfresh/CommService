@@ -12,6 +12,7 @@ pipeline {
           steps {
             sh 'echo $GOPATH'
             sh 'mkdir bin '
+            sh ' export GOBIN=$GOPATH/bin'
             sh ' curl https://glide.sh/get | sh '
             sh 'glide install '
             sh 'go build ./...'
