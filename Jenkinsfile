@@ -10,6 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
+            sh 'GOPATH=${PWD}'
             sh '''curl https://glide.sh/get | sh
 
 '''
