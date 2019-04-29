@@ -13,7 +13,7 @@ pipeline {
             GOPATH = 'pwd'
           }
           steps {
-            sh 'echo ${GOPATH}'
+            sh 'echo $(exec ${GOPATH})'
             sh 'export GOPATH=${PWD}'
             sh '''export GOBIN=$GOPATH/bin
 '''
