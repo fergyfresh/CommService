@@ -6,11 +6,16 @@ pipeline {
         stage('Build') {
           steps {
             echo 'Build Step'
-            sh '''source ~/.bash_profile
+            sh 'source ~/.bash_profile'
+            sh '''
 
 
 
-&& 
+
+
+
+
+
 go build ./...'''
           }
         }
