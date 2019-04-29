@@ -6,8 +6,9 @@ pipeline {
         stage('Build') {
           steps {
             echo 'Build Step'
-            sh 'source ~/.bash_profile'
-            sh '''
+            catchError() {
+              sh 'source ~/.bash_profile'
+              sh '''
 
 
 
@@ -17,6 +18,8 @@ pipeline {
 
 
 go build ./...'''
+            }
+
           }
         }
         stage('Communication Step ') {
