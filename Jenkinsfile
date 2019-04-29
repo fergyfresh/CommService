@@ -12,7 +12,7 @@ node('master') {
             sh "echo Deploying the build"
 
         }
-    } catch {
+     catch {
 
     } finally {
 
