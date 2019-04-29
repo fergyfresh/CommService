@@ -12,9 +12,7 @@ pipeline {
           steps {
             sh '''export GOPATH=$(pwd) && export GOBIN=$GOPATH/bin
  && export PATH=$PATH:$GOBIN
- && curl https://glide.sh/get | sh && glide install && go build ./...
-
- '''
+ && curl https://glide.sh/get | sh '''
             sh 'echo $GOPATH'
           }
         }
