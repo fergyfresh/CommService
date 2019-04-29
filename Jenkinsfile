@@ -9,9 +9,6 @@ pipeline {
     stage('Build ') {
       parallel {
         stage('Build ') {
-          environment {
-            GOPATH = '${WORKSPACE}'
-          }
           steps {
             sh 'echo $GOPATH'
             sh 'export GOPATH=${PWD}'
@@ -53,5 +50,8 @@ pipeline {
         }
       }
     }
+  }
+  environment {
+    GOPATH = '${env.BUILD_ID}'
   }
 }
