@@ -11,8 +11,8 @@ pipeline {
         stage('Build ') {
           steps {
             sh 'echo $GOPATH'
-            sh 'mkdir bin '
-            sh ' export GOBIN=$GOPATH/bin'
+            sh '''export PATH=$PATH:$GOBIN
+'''
             sh ' curl https://glide.sh/get | sh '
             sh 'glide install '
             sh 'go build ./...'
@@ -47,6 +47,6 @@ pipeline {
   }
   environment {
     GOPATH = "${WORKSPACE}"
-    GOBIN = "${WORKSPACE + '/bin'}"
+    GOBIN = "$GOPATH/bin"
   }
 }
