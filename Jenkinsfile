@@ -10,9 +10,9 @@ node('master') {
 
         stage("deploying") {
             sh "echo Deploying the build"
-
         }
-     catch {
+
+        } catch {
 
     } finally {
 
