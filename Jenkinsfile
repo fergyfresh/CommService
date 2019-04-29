@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    GOPATH = '${WORKSPACE}'
-    GOBIN = '$GOPATH/bin'
+    GOPATH = "${WORKSPACE}"
+    GOBIN = "$GOPATH/bin"
    }
   agent {
     node {
