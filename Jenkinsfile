@@ -11,8 +11,7 @@ pipeline {
         stage('Build ') {
           steps {
             sh 'GOPATH=${PWD}'
-            sh '''export GOPATH=$(go env GOPATH)
-'''
+            sh 'export GOPATH=${PWD}'
             sh '''export GOBIN=$GOPATH/bin
 '''
             sh '''export PATH=$PATH:$GOBIN
