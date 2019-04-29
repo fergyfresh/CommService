@@ -10,6 +10,10 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
+            sh '''curl https://glide.sh/get | sh
+
+'''
+            sh 'glide install '
             sh 'go build ./...'
           }
         }
