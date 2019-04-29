@@ -1,20 +1,42 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'QA_AUTO'
+    }
+
+  }
   stages {
-    stage('Set Environment ') {
-      steps {
-        echo 'Build Step'
-        sh 'source /etc/bashrc'
+    stage('Build ') {
+      parallel {
+        stage('Build ') {
+          steps {
+            sh 'go build ./... '
+          }
+        }
+        stage('Slack Message') {
+          steps {
+            echo 'Send slack message here '
+          }
+        }
       }
     }
-    stage('Build') {
+    stage('Docker Container') {
       steps {
-        sh 'go build ./...'
+        echo 'Build Docker Container'
       }
     }
-    stage('Quality Gates') {
-      steps {
-        echo 'Build Docker'
+    stage('Deploy to Kubernetes') {
+      parallel {
+        stage('Deploy to Kubernetes') {
+          steps {
+            sh 'sh "echo Deploy to Kubernetes"'
+          }
+        }
+        stage('Slack Message ') {
+          steps {
+            echo 'Send slack with deploy '
+          }
+        }
       }
     }
   }
