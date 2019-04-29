@@ -46,7 +46,7 @@ pipeline {
   environment {
     GOPATH = "${WORKSPACE}"
     GOBIN = "$GOPATH/bin"
-    PATH = "/home/jenkins/firefox:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:/home/jenkins/workspace/ice_Pipeline_feature_jenkinsfile/bin"
+    PATH = "/home/jenkins/firefox:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:${WORKSPACE} + '/bin'}"
 
   }
 }
