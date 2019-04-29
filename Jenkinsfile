@@ -9,11 +9,15 @@ pipeline {
     stage('Build ') {
       parallel {
         stage('Build ') {
+          environment {
+            GOPATH = '$(pwd)'
+            GOBIN = '$GOPATH/bin'
+          }
           steps {
-            sh '''export GOPATH=$(pwd) && export GOBIN=$GOPATH/bin
- && export PATH=$PATH:$GOBIN
- && curl https://glide.sh/get | sh '''
             sh 'echo $GOPATH'
+            sh ' curl https://glide.sh/get | sh '
+            sh 'glide install '
+            sh 'go build ./...'
           }
         }
         stage('Slack Message') {
