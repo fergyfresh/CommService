@@ -10,6 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
+            node(label: 'QA_AUTO')
             sh 'go build ./... '
           }
         }
