@@ -10,12 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
-            node(label: 'QA_AUTO') {
-              sh 'hostname '
-              sh 'whoami'
-              sh 'go build ./... '
-            }
-
+            sh 'go build ./...'
           }
         }
         stage('Slack Message') {
