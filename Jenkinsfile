@@ -12,6 +12,7 @@ pipeline {
           steps {
             node(label: 'QA_AUTO') {
               sh 'go build ./... '
+              sh 'whoami'
             }
 
           }
