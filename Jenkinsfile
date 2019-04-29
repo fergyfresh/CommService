@@ -16,6 +16,7 @@ pipeline {
 '''
             sh '''export PATH=$PATH:$GOBIN
 '''
+            sh 'echo $GOPATH'
             sh '''curl https://glide.sh/get | sh
 
 '''
