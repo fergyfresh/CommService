@@ -10,8 +10,6 @@ pipeline {
       parallel {
         stage('Build ') {
           steps {
-            sh '''export PATH=$PATH:$GOBIN
-'''
             sh 'echo $GOPATH'
             sh ' curl https://glide.sh/get | sh '
             sh 'glide install '
@@ -48,5 +46,7 @@ pipeline {
   environment {
     GOPATH = "${WORKSPACE}"
     GOBIN = "$GOPATH/bin"
+    PATH = "/home/jenkins/firefox:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:/home/jenkins/workspace/ice_Pipeline_feature_jenkinsfile/bin"
+
   }
 }
