@@ -10,7 +10,7 @@ pipeline {
       parallel {
         stage('Build ') {
           environment {
-            GOPATH = '$(pwd)'
+            GOPATH = '${env.WORKSPACE}'
             GOBIN = '$GOPATH/bin'
           }
           steps {
