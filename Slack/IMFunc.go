@@ -2,7 +2,7 @@ package Slack
 
 import (
 	"encoding/json"
-	"github.com/DMEvanCT/Auth"
+	"github.com/DMEvanCT/CommService/Auth"
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
