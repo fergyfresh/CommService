@@ -18,12 +18,6 @@ type QueryDat struct {
 
 
 
-
-
-
-
-
-
 func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName string) (string,  error) {
 	mg := mailgun.NewMailgun(domain, apiKey)
 	m := mg.NewMessage(
