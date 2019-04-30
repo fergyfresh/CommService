@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/DMEvanCT/MailGun"
-	"github.com/DMEvanCT/Slack"
-	"github.com/DMEvanCT/Middleware"
+
+	"github.com/DMEvanCT/CommService/MailGun"
+	"github.com/DMEvanCT/CommService/Slack"
+	"github.com/DMEvanCT/CommService/Middleware"
 	"github.com/gorilla/mux"
 	ghandlers "github.com/gorilla/handlers"
 	"log"
