@@ -11,6 +11,7 @@ pipeline {
         stage('Build ') {
           steps {
             sh 'echo $GOPATH'
+            sh 'mkdir src'
             sh 'mkdir bin'
             sh ' curl https://glide.sh/get | sh '
             sh 'glide install '
@@ -48,6 +49,5 @@ pipeline {
     GOPATH = "${WORKSPACE}"
     GOBIN = "$GOPATH/bin"
     PATH = "/home/jenkins/firefox:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:${GOBIN}"
-
   }
 }
