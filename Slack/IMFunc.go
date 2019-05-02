@@ -35,8 +35,8 @@ func Communication(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&slackData)
 	akey := r.Header.Get("x-auth-token")
 	username := r.Header.Get("x-auth-user")
-	//auth := Auth.AuthenticatedUser("c4a3acd4-2ef6-4a5c-b97a-0aa5578503cf", "Clarity")
-	auth := Auth.AuthenticatedUser(akey, username)
+	auth := Auth.AuthorizeAuthenticate(akey, username, slackData.Service)
+	//auth := Auth.AuthorizedUser(username, "slack")
 	if auth == false {
 		w.WriteHeader(http.StatusForbidden)
 

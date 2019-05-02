@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/mailgun/mailgun-go"
+	"github.com/mailgun/mailgun-go/v3"
 	"github.com/spf13/viper"
 	"log"
 	"time"
@@ -44,7 +44,7 @@ func SendMaulGunEmailTemplate() {
 
 func SendMailGunEmailByFieldNonTemplate(Condition, DB, QueryField,  domain, apiKey, subject, message, sender, senderName, City, State  string ) {
 
-	viper.AddConfigPath("/etc/commservice//")
+	viper.AddConfigPath("/etc/commservice/")
 	viper.SetConfigName("comconfig")
 	viper.ReadInConfig()
 	username := viper.GetString("emaildb.username")

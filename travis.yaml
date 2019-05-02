@@ -8,6 +8,8 @@ language: go
 env:
   - GO111MODULE=on
   - GOFLAGS='-mod vendor'
+  - ENV GOOS=linux
+  - ENV GOARCH=amd64
 
 # You don't need to test on very old versions of the Go compiler. It's the user's
 # responsibility to keep their compiler up to date.
@@ -21,11 +23,8 @@ git:
 # Skip the install step. Don't `go get` dependencies. Only build with the code
 # in vendor/
 install:
-  - curl https://glide.sh/get | sh
-  - glide cc
-  - glide up
-  - glide install
-  - go get github.com/mailgun/mailgun-go
+  - go mod init
+  - go build ./...
 
 
     # Don't email me the results of the test runs.
@@ -37,7 +36,7 @@ notifications:
 # Make sure golangci-lint is vendored.
 before_script:
   - go install github.com/golangci/golangci-lint/cmd/golangci-lint
-  - glide install glide.yaml
+
 
 # script always runs to completion (set +e). If we have linter issues AND a
 # failing test, we want to see both. Configure golangci-lint with a
