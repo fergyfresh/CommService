@@ -3,6 +3,8 @@ dist: xenial
 
 language: go
 
+go:
+  - 1.12.x
 # Force-enable Go modules. Also force go to use the code in vendor/
 # These will both be unnecessary when Go 1.13 lands.
 env:
@@ -13,8 +15,7 @@ env:
 
 # You don't need to test on very old versions of the Go compiler. It's the user's
 # responsibility to keep their compiler up to date.
-go:
-  - 1.12.x
+
 
 # Only clone the most recent commit.
 git:
