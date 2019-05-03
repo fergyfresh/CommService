@@ -11,11 +11,6 @@ env:
   - GO111MODULE=on
 
 
-addons:
-  sonarcloud:
-    organization: "dmevanct-github" # the key of the org you chose at step #3
-    token:
-      secure:  "Z65WrLsLONlYq7Kqm1nYcnGMugCiqfC8JkLLAMOrwu0StiW2DThv0ZNDtLCYFwHbhweXUURLCuAI6EmmUdbYLSu+CsoZqLx0xHxqv5rQuv++iKWeVZz6MgQJPKXDOwDr6xMU34cDfu4nkIJnUNf/rbW//3nWoisHvyZlfS+lhprA1475vEAJu9JAdEUAyw8JpusNP4+mAru0CgNTRvCYWV1nyHJUWAZiT3WQE/PU/yLschyCc6Ymc8fq47gvZ1HC/g0uYPMyJeJ2revZcWXyWwUmSH5I281JRdPyswi4DcgroIm2nxxPe1dEYAsdNUENaTlFpoG61Aj7KVkdqPXpVaALZaH9/D++42rytqwbIbSYp4Ok/EV38dhGbPeloPeinCUO13rI6ourxqX/6NdiiIxi7dhaa6WXkX0wkBgj455HSdvBQwcE/ZgUFk/vqRVCe/4ijXvrhEVdGWFyk3qDxgMl5OoEQB6igAcRZra5620vBbNemnFVCs0Y0BFFalODGD63zd+sYTWGI1A9a/lV0JxKRcf0cnEwYnU2YL2DKLGqNto0YK0wH63kofzx7bwF9xt6bKMLFngbhHCJ7sh5ajjlENlYoM9gLBXW2hKAfzG8yKpo8t7Xz7XPdUUrbWtWyoK1ydUixzd0ZcsQDR/CY0GOaWLmBeMdoXkQbfFSDA4=" # encrypted value of your token
 
 
 # You don't need to test on very old versions of the Go compiler. It's the user's

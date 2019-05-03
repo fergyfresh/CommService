@@ -1,10 +1,7 @@
 package Auth
 
 import (
-	"database/sql"
 	"github.com/DMEvanCT/CommService/Database"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/spf13/viper"
 	"log"
 )
 
