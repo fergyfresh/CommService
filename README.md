@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/DMEvanCT/CommService.svg?branch=master)](https://travis-ci.com/DMEvanCT/CommService)
+
 # DM Communication Microservice
 Used for communications between Application and users
 

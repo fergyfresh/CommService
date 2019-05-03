@@ -2,6 +2,7 @@ package Auth
 
 import (
 	"database/sql"
+	"github.com/DMEvanCT/CommService/Database"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/viper"
 	"log"
@@ -18,19 +19,9 @@ func AuthenticatedUser(akey, username string) (bool) {
 
 	var apikey string
 	var authenticated bool;
-	viper.AddConfigPath("/etc/commservice/")
-	viper.SetConfigName("comconfig")
-	viper.ReadInConfig()
-	dbusername := viper.GetString("authdb.username")
-	dbpass := viper.GetString("authdb.password")
-	serverip := viper.GetString("authdb.dbhost")
 
-	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
-	if err != nil {
-		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
-		log.Fatal(err)
+	db := Database.DatabaseInitAuth()
 
-	}
 	tx, err := db.Begin()
 	if err != nil {
 		log.Fatal(err)
@@ -73,19 +64,7 @@ func AuthorizedUser(username, service  string) bool {
 
 	var Authorized int;
 	var Authed bool;
-	viper.AddConfigPath("/etc/commservice/")
-	viper.SetConfigName("comconfig")
-	viper.ReadInConfig()
-	dbusername := viper.GetString("authdb.username")
-	dbpass := viper.GetString("authdb.password")
-	serverip := viper.GetString("authdb.dbhost")
-
-	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
-	if err != nil {
-		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
-		log.Fatal(err)
-
-	}
+	db := Database.DatabaseInitAuth()
 	tx, err := db.Begin()
 	if err != nil {
 		log.Fatal(err)
