@@ -26,22 +26,4 @@ func DatabaseInitAuth() (*sql.DB)  {
 
 }
 
-// General SQL connection for writes
-func DatabaseInitAll(conflocation, confname, username, password, host string)  (*sql.DB) {
-	viper.AddConfigPath(conflocation)
-	viper.SetConfigName(confname)
-	viper.ReadInConfig()
-	dbusername := viper.GetString(username)
-	dbpass := viper.GetString(password)
-	serverip := viper.GetString(host)
-
-	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
-	if err != nil {
-		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
-		log.Fatal(err)
-
-}
-	return db
-
-}
-
+git
