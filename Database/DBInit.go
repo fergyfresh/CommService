@@ -26,4 +26,24 @@ func DatabaseInitAuth() (*sql.DB)  {
 
 }
 
-git
+// Generic database connection configpath ex: /etc/comservice/ configname ex commservice username db.username password db.password host db.host
+func DatabaseInitGeneric(configpath, configname, usernanme, password, host string) (*sql.DB)  {
+	viper.AddConfigPath(configpath)
+	viper.SetConfigName(configname)
+	viper.ReadInConfig()
+	dbusername := viper.GetString(usernanme)
+	dbpass := viper.GetString(password)
+	serverip := viper.GetString(host)
+
+	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
+	if err != nil {
+		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
+		log.Fatal(err)
+
+	}
+	return db
+
+}
+
+
+
