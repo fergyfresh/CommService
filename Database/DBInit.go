@@ -27,7 +27,7 @@ func DatabaseInitAuth() (*sql.DB)  {
 }
 
 // Generic database connection configpath ex: /etc/comservice/ configname ex commservice username db.username password db.password host db.host
-func DatabaseInitGeneric(configpath, configname, usernanme, password, host string) (*sql.DB)  {
+func DatabaseInitAll(configpath, configname, usernanme, password, host string) (*sql.DB)  {
 	viper.AddConfigPath(configpath)
 	viper.SetConfigName(configname)
 	viper.ReadInConfig()
