@@ -1,0 +1,6 @@
+projectKey=ComService
+serverUrl=https://sonarqube.clarityssi.net
+serverVersion=7.7.0.23042
+dashboardUrl=https://sonarqube.clarityssi.net/dashboard?id=ComService
+ceTaskId=AWqDZb7WeHqOH2LtNykA
+ceTaskUrl=https://sonarqube.clarityssi.net/api/ce/task?id=AWqDZb7WeHqOH2LtNykA
