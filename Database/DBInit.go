@@ -2,9 +2,11 @@ package Database
 
 import (
 	"database/sql"
-	"log"
-	"github.com/spf13/viper"
+	"fmt"
+	"github.com/go-redis/redis"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/spf13/viper"
+	"log"
 )
 
 // Specific for the auth db
@@ -43,6 +45,20 @@ func DatabaseInitAll(configpath, configname, usernanme, password, host string) (
 	}
 	return db
 
+}
+
+
+func RedisInit(redishost, redispass string, db int)  (*redis.Client){
+	client := redis.NewClient(&redis.Options{
+		Addr:     redishost,
+		Password: redispass, // no password set
+		DB:       db,  // use default DB
+	})
+
+	pong, err := client.Ping().Result()
+	fmt.Println(pong, err)
+
+	return client
 }
 
 
