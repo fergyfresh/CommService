@@ -6,7 +6,6 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
-
 )
 
 type SlackData struct {
@@ -26,7 +25,6 @@ type Message struct {
 var service string;
 
 func Communication(w http.ResponseWriter, r *http.Request) {
-
 	var slackData  SlackData
 
 
@@ -80,7 +78,11 @@ func Communication(w http.ResponseWriter, r *http.Request) {
 
 
 
+
+
 		json.NewEncoder(w).Encode(message)
+
+
 
 
 	default:
