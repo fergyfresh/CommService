@@ -2,10 +2,9 @@ package main
 
 import (
 	"github.com/DMEvanCT/CommService/MailGun"
-	"github.com/DMEvanCT/CommService/Slack"
 	"github.com/DMEvanCT/CommService/Middleware"
+	"github.com/DMEvanCT/CommService/Slack"
 	"github.com/gorilla/mux"
-	ghandlers "github.com/gorilla/handlers"
 	"log"
 	"net/http"
 	"os"
@@ -23,7 +22,6 @@ func main() {
 	http.Handle("/", middleware.PanicRecoveryHandler((ghandlers.LoggingHandler(os.Stdout, r))))
 	// listens on localhost:8080
 	log.Fatal(http.ListenAndServe(":8080", nil))
-
 
 
 }

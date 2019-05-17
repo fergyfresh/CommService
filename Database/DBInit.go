@@ -9,6 +9,17 @@ import (
 	"log"
 )
 
+
+func OpenDB(dbusername, dbpass, serverip string ) (*sql.DB) {
+	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
+	if err != nil {
+		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
+		log.Fatal(err)
+
+	}
+	return db
+}
+
 // Specific for the auth db
 func DatabaseInitAuth() (*sql.DB)  {
 	viper.AddConfigPath("/etc/commservice/")
@@ -17,14 +28,10 @@ func DatabaseInitAuth() (*sql.DB)  {
 	dbusername := viper.GetString("authdb.username")
 	dbpass := viper.GetString("authdb.password")
 	serverip := viper.GetString("authdb.dbhost")
+	databaseconn := OpenDB(dbusername, dbpass, serverip)
 
-	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
-	if err != nil {
-		log.Fatal("Sorry there was a problem connecting to the database with user " + dbusername + " host " + serverip +  " pass " + dbpass + " Please check /etc/commservice/credentials.yaml")
-		log.Fatal(err)
 
-	}
-	return db
+	return databaseconn
 
 }
 
@@ -36,6 +43,21 @@ func DatabaseInitAll(configpath, configname, usernanme, password, host string) (
 	dbusername := viper.GetString(usernanme)
 	dbpass := viper.GetString(password)
 	serverip := viper.GetString(host)
+	databaseconn := OpenDB(dbusername, dbpass, serverip)
+
+
+	return databaseconn
+}
+
+
+// For use with the DBByEnvFunction
+func DatabaseInitAllHost(configpath, configname, usernanme, password, host string) (*sql.DB)  {
+	viper.AddConfigPath(configpath)
+	viper.SetConfigName(configname)
+	viper.ReadInConfig()
+	dbusername := viper.GetString(usernanme)
+	dbpass := viper.GetString(password)
+	serverip := host
 
 	db, err := sql.Open("mysql", dbusername + ":" + dbpass +  "@tcp(" + serverip + ")" + "/")
 	if err != nil {
@@ -47,7 +69,7 @@ func DatabaseInitAll(configpath, configname, usernanme, password, host string) (
 
 }
 
-
+// Used to connect to Redis
 func RedisInit(redishost, redispass string, db int)  (*redis.Client){
 	client := redis.NewClient(&redis.Options{
 		Addr:     redishost,
