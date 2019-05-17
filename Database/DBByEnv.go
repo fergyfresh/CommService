@@ -18,6 +18,7 @@ func DatabaseByEnvironment(Environment string) (string){
 	stmt, err := tx.Query("SELECT db_ip FROM clarity_tools.tbl_database_info  WHERE db_env = ?", Environment)
 	if err != nil {
 		log.Fatal("There was a problem up the db.")
+
 	}
 	defer stmt.Close()
 
