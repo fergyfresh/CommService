@@ -29,7 +29,7 @@ func DatabaseByEnvironment(Environment string) (string){
 		if err != nil {
 			log.Fatal(err)
 		}
-		return db_ip
+
 	}
 
 	return db_ip
