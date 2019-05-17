@@ -1,0 +1,7 @@
+organization=dmevanct-github
+projectKey=fairtrackservice
+serverUrl=https://sonarcloud.io
+serverVersion=7.8.0.24676
+dashboardUrl=https://sonarcloud.io/dashboard?id=fairtrackservice
+ceTaskId=AWrDy8Y1Aki0z6x-6xkY
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWrDy8Y1Aki0z6x-6xkY
