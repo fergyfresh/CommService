@@ -5,6 +5,7 @@ import (
 	"github.com/DMEvanCT/CommService/Middleware"
 	"github.com/DMEvanCT/CommService/Slack"
 	"github.com/gorilla/mux"
+	ghandlers "github.com/gorilla/handlers"
 	"log"
 	"net/http"
 	"os"
