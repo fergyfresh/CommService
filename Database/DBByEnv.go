@@ -8,7 +8,7 @@ import (
 func DatabaseByEnvironment(Environment string) (string){
 	db := DatabaseInitAll("/etc/dm","GenService", "GenService.username", "GenService.password", "GenService.dbhost")
 	var db_ip string;
-
+	//var databaseip string;
 	tx, err := db.Begin()
 	if err != nil {
 		log.Fatal(err)
@@ -28,7 +28,6 @@ func DatabaseByEnvironment(Environment string) (string){
 		if err != nil {
 			log.Fatal(err)
 		}
-
 	}
 
 	return db_ip
