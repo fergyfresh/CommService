@@ -2,11 +2,11 @@ package Database
 
 
 import (
-"log"
+	"log"
 )
 
 func DatabaseByEnvironment(Environment string) (string){
-	db := DatabaseInitAll("/etc/userservice","userservice", "DevOpsDB.username", "DevOpsDB.password", "DevOpsDB.dbhost")
+	db := DatabaseInitAll("/etc/dm","GenService", "GenService.username", "GenService.password", "GenService.dbhost")
 	var db_ip string;
 
 	tx, err := db.Begin()
@@ -18,7 +18,6 @@ func DatabaseByEnvironment(Environment string) (string){
 	stmt, err := tx.Query("SELECT db_ip FROM clarity_tools.tbl_database_info  WHERE db_env = ?", Environment)
 	if err != nil {
 		log.Fatal("There was a problem up the db.")
-
 	}
 	defer stmt.Close()
 
