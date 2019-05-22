@@ -11,10 +11,9 @@ type Authenticated struct {
 
 
 
-
 func AuthenticatedUser(akey, username string) (bool) {
 
-	var apikey string
+	//akey := md5.New(akey)
 	var authenticated bool;
 
 	db := Database.DatabaseInitAuth()
@@ -82,14 +81,14 @@ func AuthorizedUser(username, service  string) bool {
 			log.Fatal(err)
 		}
 		if Authorized == 0 {
-			log.Println("You are not authenticated")
+			log.Println("You are not Authorized")
 			Authed := false
 
 			return Authed
 		}
 
 		if Authorized == 1 {
-			log.Println("You are authenticated!")
+			log.Println("You are Authorized!")
 			authenticated := true
 			return authenticated
 		}
