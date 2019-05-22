@@ -13,7 +13,7 @@ type Authenticated struct {
 
 func AuthenticatedUser(akey, username string) (bool) {
 
-	//akey := md5.New(akey)
+	var apikey string;
 	var authenticated bool;
 
 	db := Database.DatabaseInitAuth()
