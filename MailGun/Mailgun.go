@@ -3,7 +3,6 @@ package MailGunz
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"github.com/mailgun/mailgun-go/v3"
 	"github.com/spf13/viper"
 	"log"
@@ -37,9 +36,26 @@ func SendMailGunEmail(domain, apiKey, subject, message, to, sender, senderName s
 	return id, err
 }
 
-func SendMaulGunEmailTemplate() {
-	fmt.Println("This is the template func")
+func SendMaulGunEmailTemplate(domain, apiKey, subject, message, to, sender, senderName string) (string,  error) {
+	mg := mailgun.NewMailgun(domain, apiKey)
+	m := mg.NewMessage(
+		senderName + " " +  "<" + sender + ">",
+		subject,
+		message,
+		to,
+
+	)
+	m.SetHtml( "<html><h1>" + subject +"</h1><p>" +  message + "<p></html>")
+	//m.AddAttachment("files/test.jpg")
+	//m.AddAttachment("files/test.txt")
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
+	defer cancel()
+
+	_, id, err  := mg.Send(ctx, m)
+	return id, err
 }
+
 
 
 func SendMailGunEmailByFieldNonTemplate(Condition, DB, QueryField,  domain, apiKey, subject, message, sender, senderName, City, State  string ) {
@@ -81,6 +97,7 @@ func SendMailGunEmailByFieldNonTemplate(Condition, DB, QueryField,  domain, apiK
 			Email,
 		)
 		m.SetHtml( "<html><h1>" + subject + " Hello " + FirstName + " " + LastName + "</h1><p>" +  message + "<p></html>")
+		m.SetTemplate("")
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 		defer cancel()
 		_, id, err  := mg.Send(ctx, m)
