@@ -2,7 +2,7 @@ package MailGunz
 
 import (
 	"encoding/json"
-	"github.com/DMEvanCT/CommService/Auth"
+	"github.com/DMEvanCT/GoBase/Auth"
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
