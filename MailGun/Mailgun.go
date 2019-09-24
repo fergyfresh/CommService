@@ -3,7 +3,7 @@ package MailGunz
 import (
 	"context"
 	"database/sql"
-	"github.com/mailgun/mailgun-go/v3"
+	"github.com/mailgun/mailgun-go"
 	"github.com/spf13/viper"
 	"log"
 	"time"
